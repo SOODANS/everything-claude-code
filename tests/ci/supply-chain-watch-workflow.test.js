@@ -49,10 +49,15 @@ function run() {
     assert.doesNotMatch(source, /actions\/cache@/);
   })) passed++; else failed++;
 
-  if (test('installs without lifecycle scripts and verifies registry signatures', () => {
-    assert.match(source, /npm ci --ignore-scripts/);
-    assert.match(source, /npm audit signatures/);
-    assert.match(source, /npm audit --audit-level=high/);
+  if (test('installs dependencies immutably without lifecycle scripts and audits high-severity advisories', () => {
+    assert.match(
+      source,
+      /yarn install --immutable --mode=skip-build/,
+    );
+    assert.match(
+      source,
+      /yarn npm audit --all --recursive --severity high/,
+    );
   })) passed++; else failed++;
 
   if (test('runs IOC fixtures, emits JSON report, and uploads the artifact', () => {
