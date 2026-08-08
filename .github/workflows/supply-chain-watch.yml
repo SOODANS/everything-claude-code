@@ -29,15 +29,15 @@ jobs:
         with:
           node-version: '22.x'
             
-      - name: Install dependencies without lifecycle scripts
-        run: npm ci --ignore-scripts
-
-      - name: Verify registry signatures
-        run: npm audit signatures
-    
+      - name: Enable Corepack
+        run: corepack enable
+      
+      - name: Install dependencies immutably without lifecycle scripts
+        run: yarn install --immutable --mode=skip-build
+      
       - name: Verify registry advisories
-        run: npm audit --audit-level=high
-
+        run: yarn npm audit --all --recursive --severity high
+        
       - name: Validate IOC scanner fixtures
         run: node tests/ci/scan-supply-chain-iocs.test.js
 
