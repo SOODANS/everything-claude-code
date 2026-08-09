@@ -41,7 +41,7 @@ const WRITE_PERMISSION_PATTERN = /^\s*(?:contents|issues|pull-requests|actions|c
 // of the persist-credentials gate below. The optional single/double quotes
 // match valid YAML `permissions: "write-all"` / `'write-all'` forms.
 const WRITE_ALL_PATTERN = /^\s*permissions:\s*["']?write-all["']?\s*$/m;
-const NPM_AUDIT_PATTERN = /\bnpm\s+audit\b(?!\s+signatures\b)/;
+const NPM_AUDIT_PATTERN = /(?<!\byarn\s)\bnpm\s+audit\b(?!\s+signatures\b)/;
 const NPM_AUDIT_SIGNATURES_PATTERN = /\bnpm\s+audit\s+signatures\b/;
 const ACTIONS_CACHE_PATTERN = /uses:\s*['"]?actions\/cache@/m;
 const ID_TOKEN_WRITE_PATTERN = /^\s*id-token:\s*write\b/m;
